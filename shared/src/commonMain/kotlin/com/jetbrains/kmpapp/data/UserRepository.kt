@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class MuseumRepository(
+class UserRepository(
     private val apiInterface: ApiInterface
     ) {
     private val scope = CoroutineScope(SupervisorJob())
-    private val storedObjects = MutableStateFlow(emptyList<MuseumObject>())
+    private val storedObjects = MutableStateFlow(emptyList<UserObjectListItem>())
 
 
     fun initialize() {
@@ -20,15 +20,15 @@ class MuseumRepository(
         }
     }
 
-    suspend fun refresh() {
-        storedObjects.value = apiInterface.getMuseumData()
+    private suspend fun refresh() {
+        storedObjects.value = apiInterface.getUserData()
     }
 
-    fun getObjects(): Flow<List<MuseumObject>> = storedObjects
+    fun getObjects(): Flow<List<UserObjectListItem>> = storedObjects
 
-    fun getObjectById(objectId: Int): Flow<MuseumObject?> {
+    fun getObjectById(objectId: Int): Flow<UserObjectListItem?> {
         return storedObjects.map { objects ->
-            objects.find { it.objectID == objectId }
+            objects.find { it.id == objectId }
         }
     }
 }

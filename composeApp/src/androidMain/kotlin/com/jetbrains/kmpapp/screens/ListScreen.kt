@@ -5,20 +5,22 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -51,8 +53,7 @@ private fun ObjectGrid(
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(180.dp),
+    LazyColumn (
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp)
     ) {
@@ -71,8 +72,9 @@ private fun ObjectFrame(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
             .padding(8.dp)
             .clickable { onClick() }
     ) {
@@ -80,16 +82,23 @@ private fun ObjectFrame(
             model = obj.primaryImageSmall,
             contentDescription = obj.title,
             contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
             modifier = Modifier
+                .size(62.dp)
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(Color.LightGray),
         )
 
-        Spacer(Modifier.height(2.dp))
+        Spacer(Modifier.width(8.dp))
 
-        Text(obj.title, style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold))
-        Text(obj.artistDisplayName, style = MaterialTheme.typography.body2)
-        Text(obj.objectDate, style = MaterialTheme.typography.caption)
+        Column {
+            Text(
+                obj.title,
+                style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold)
+            )
+            Text(obj.artistDisplayName, style = MaterialTheme.typography.body2)
+            Text(obj.objectDate, style = MaterialTheme.typography.caption)
+        }
     }
 }

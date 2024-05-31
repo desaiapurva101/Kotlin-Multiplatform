@@ -41,7 +41,7 @@ struct ObjectFrame: View {
     let onClick: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        HStack(alignment: .center, spacing: 4) {
             GeometryReader { geometry in
                 AsyncImage(url: URL(string: obj.primaryImageSmall)) { phase in
                     switch phase {
@@ -63,14 +63,17 @@ struct ObjectFrame: View {
             }
             .aspectRatio(1, contentMode: .fit)
 
-            Text(obj.title)
-                .font(.headline)
+            VStack(alignment: .leading, spacing: 4){
+                Text(obj.title)
+                    .font(.headline)
 
-            Text(obj.artistDisplayName)
-                .font(.subheadline)
+                Text(obj.artistDisplayName)
+                    .font(.subheadline)
 
-            Text(obj.objectDate)
-                .font(.caption)
+                Text(obj.objectDate)
+                    .font(.caption)
+            }
+
         }
     }
 }

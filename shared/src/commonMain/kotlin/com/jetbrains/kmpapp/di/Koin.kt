@@ -1,10 +1,9 @@
 package com.jetbrains.kmpapp.di
 
-import com.jetbrains.kmpapp.data.InMemoryMuseumStorage
-import com.jetbrains.kmpapp.data.KtorMuseumApi
-import com.jetbrains.kmpapp.data.MuseumApi
+import com.jetbrains.kmpapp.data.KtorApiInterface
+import com.jetbrains.kmpapp.data.ApiInterface
 import com.jetbrains.kmpapp.data.MuseumRepository
-import com.jetbrains.kmpapp.data.MuseumStorage
+import com.jetbrains.kmpapp.data.UserRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
@@ -25,10 +24,14 @@ val dataModule = module {
         }
     }
 
-    single<MuseumApi> { KtorMuseumApi(get()) }
-    single<MuseumStorage> { InMemoryMuseumStorage() }
+    single<ApiInterface> { KtorApiInterface(get()) }
     single {
-        MuseumRepository(get(), get()).apply {
+        MuseumRepository(get()).apply {
+            initialize()
+        }
+    }
+    single {
+        UserRepository(get()).apply {
             initialize()
         }
     }
