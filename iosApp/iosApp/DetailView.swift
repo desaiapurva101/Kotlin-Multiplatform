@@ -15,7 +15,11 @@ struct DetailView: View {
     var body: some View {
         VStack {
             if let obj = viewModel.museumObject {
-                ObjectDetails(obj: obj)
+                NavigationStack {
+                    NavigationLink(destination: UserListView()) {
+                        ObjectDetails(obj: obj, onClick: {})
+                    }.buttonStyle(PlainButtonStyle())
+                }
             }
         }
         .onAppear {
@@ -26,6 +30,7 @@ struct DetailView: View {
 
 struct ObjectDetails: View {
     var obj: MuseumObject
+    let onClick: () -> Void
 
     var body: some View {
         ScrollView {
@@ -69,6 +74,6 @@ struct LabeledInfo: View {
 
     var body: some View {
         Spacer()
-        Text("**\(label):** \(data)")
+        Text("***\(label):*** \(data)")
     }
 }

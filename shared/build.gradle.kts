@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kmpNativeCoroutines)
+    id("com.google.gms.google-services")
 }
 
 kotlin {
@@ -22,6 +23,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
+//            export(project("io.github.mirzemehdi:kmpnotifier:0.6.0"))
             baseName = "Shared"
             isStatic = true
         }
@@ -40,6 +42,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.koin.core)
             api(libs.kmm.viewmodel)
+            api(libs.kmpnotifier)
         }
 
         // Required by KMM-ViewModel

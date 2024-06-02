@@ -7,4 +7,5 @@ import org.koin.core.component.inject
 
 class KoinDependencies : KoinComponent {
     val museumRepository: MuseumRepository by inject()
+    val userRepository: UserRepository by inject()
 }

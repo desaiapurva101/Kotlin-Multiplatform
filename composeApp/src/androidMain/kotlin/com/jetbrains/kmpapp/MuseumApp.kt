@@ -6,11 +6,18 @@ import com.jetbrains.kmpapp.screens.DetailViewModel
 import com.jetbrains.kmpapp.screens.ListViewModel
 import com.jetbrains.kmpapp.screens.UserDetailViewModel
 import com.jetbrains.kmpapp.screens.UserListViewModel
+import com.mmk.kmpnotifier.notification.NotifierManager
+import com.mmk.kmpnotifier.notification.configuration.NotificationPlatformConfiguration
 import org.koin.dsl.module
 
 class MuseumApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        NotifierManager.initialize(
+            configuration = NotificationPlatformConfiguration.Android(
+                notificationIconResId = R.drawable.ic_launcher_foreground,
+            )
+        )
         initKoin(
             listOf(
                 module {

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
+import com.mmk.kmpnotifier.notification.NotifierManager
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -60,7 +61,12 @@ private fun ObjectGrid(
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
                 obj = obj,
-                onClick = { onObjectClick(obj.objectID) },
+                onClick = {
+
+                    val notifier = NotifierManager.getLocalNotifier()
+                    notifier.notify(1, "Title", "Body")
+
+                    onObjectClick(obj.objectID) },
             )
         }
     }

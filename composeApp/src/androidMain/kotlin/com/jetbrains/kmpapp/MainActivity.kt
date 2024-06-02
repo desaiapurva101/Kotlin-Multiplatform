@@ -11,9 +11,12 @@ import com.jetbrains.kmpapp.screens.DetailScreen
 import com.jetbrains.kmpapp.screens.ListScreen
 import com.jetbrains.kmpapp.screens.user.UserDetailScreen
 import com.jetbrains.kmpapp.screens.user.UserListScreen
+import com.mmk.kmpnotifier.notification.NotifierManager
+import com.mmk.kmpnotifier.permission.permissionUtil
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,7 +24,13 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = ListScreen) {
                 composable<ListScreen> {
+
                     ListScreen(navigateToDetails = { objectId ->
+                        NotifierManager.addListener(object : NotifierManager.Listener {
+                            override fun onNewToken(token: String) {
+                                println("onNewToken: $token") //Update user token in the server if needed
+                            }
+                        })
                         navController.navigate(DetailsScreen(objectId))
                     })
                 }

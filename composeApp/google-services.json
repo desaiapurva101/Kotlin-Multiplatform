@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40038655357",
+    "project_id": "kmm-demo-74332",
+    "storage_bucket": "kmm-demo-74332.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40038655357:android:a3e2eae19891e7fefd9814",
+        "android_client_info": {
+          "package_name": "com.jetbrains.kmpapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1nuIpvqT8TPBxssdJEfPOXmySxlc9eAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
